@@ -44,21 +44,18 @@ def create_event():
 
 
 # Endpoint: Data Retrieval
+
 @application.route('/data', methods=['GET'])
 def get_data():
-    """
-    Fetch all event data from the database.
-    """
     try:
         data = fetch_data_from_db()
-        return jsonify(data), 200
+        return jsonify({"data": data}), 200
     except Exception as e:
         logging.exception("Error occurred during data retrieval")
         return jsonify({
             "error": "During data retrieval",
             "detail": str(e)
         }), 500
-
 
 def get_db_connection():
     """
